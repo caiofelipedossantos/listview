@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ListView</title>
+
+    <style>
+        .inner {
+            position: relative;
+            max-width: 1080px;
+            margin: 0 auto;
+            min-width: 320px;
+            padding: 0 10px;
+        }
+
+        .item-list {
+            overflow: hidden;
+        }
+
+        .item-list .item {
+            position: relative;
+            display: table;
+            width: 100%;
+            background: #FFF;
+            margin-top: 5px;
+        }
+
+        .item-list .item>div {
+            padding: 10px;
+        }
+
+        .item-list .item .action {
+            position: absolute;
+            width: auto;
+            height: 100%;
+            top: 0;
+            border: 0;
+            color: #FFF;
+            outline: none;
+        }
+
+        .item-list .item .action:first-child::before,
+        .item-list .item .action:last-child::before {
+            position: absolute;
+            top: 0;
+            content: '';
+            width: 100%;
+            height: 100%;
+        }
+
+        .item-list .item .action:first-child {
+            left: -90px;
+        }
+
+        .item-list .item .action:first-child::before {
+            right: 90px;
+        }
+
+        .item-list .item .action:last-child {
+            right: -100%;
+        }
+
+        .item-list .item .action:last-child::before {
+            left: 90px;
+        }
+
+        .item-list .item .action,
+        .item-list .item .action::before {
+            background: #E74C3C;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="inner">
+        <div class="item-list">
+            <div class="item">
+                <div>First Item</div>
+                <button class="action">Right Button</button>
+            </div>
+            <div class="item">
+                <div>First Item</div>
+                <div class="action">
+                    <button>Delete</button>
+                    <button>Right Button</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="listView.js"></script>
+    <script>
+        $('.item-list').listView({
+            closeOnOpen: false,
+            leftAction: false
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>List View</title>
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <style>
+        .ui-listview>li {
+            display: table;
+            width: 100%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .ui-listview>li>a.ui-btn {
+            overflow: initial;
+            margin-right: 0;
+            -webkit-transition: -webkit-transform 400ms ease-out;
+            -moz-transition: -moz-transform 400ms ease-out;
+            -o-transition: -o-transform 400ms ease-out;
+            transition: transform 400ms ease-out;
+        }
+
+        .ui-listview>li span {
+            z-index: auto;
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            height: 43px;
+            width: 0;
+            float: right;
+            display: table-cell;
+            -webkit-transition: width 380ms ease-out;
+            -moz-transition: width 380ms ease-out;
+            -o-transition: width 380ms ease-out;
+            transition: width 380ms ease-out;
+        }
+
+        .ui-listview>li span.show {
+            width: 70px;
+            cursor: pointer;
+        }
+
+        .ui-listview>li p.btn {
+            text-align: center;
+            vertical-align: middle;
+            font-size: 1em;
+            text-shadow: none;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            text-rendering: optimizeLegibility;
+            text-overflow: clip;
+        }
+
+        .ui-listview>li span.delete {
+            background-color: #FF3B30;
+        }
+
+        .ui-listview>li span.flag {
+            background-color: #FF9500;
+        }
+
+        .ui-listview>li span.more {
+            background-color: #D6CEC3;
+        }
+
+        .ui-listview>li .ui-btn span.flagged {
+            padding: 0;
+            height: 25px;
+            width: 25px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto 35px auto auto;
+            background-image: url(http://discovercoronadwp.com/img/yellowflag.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div data-role="page" id="home">
+        <div role="main" class="ui-content">
+            <ul data-role="listview" id="list">
+                <li>
+                    <span class="delete">
+                        <p class="btn">
+                            Trash
+                        </p>
+                    </span>
+                    <span class="flag">
+                        <p class="btn">
+                            Flag
+                        </p>
+                    </span>
+                    <span class="more">
+                        <p class="btn">
+                            More
+                        </p>
+                    </span>
+                    <a href="#" draggable="false">
+                        Item 1
+                        <span class="flagged ui-screen-hidden">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <span class="delete">
+                        <p class="btn">
+                            Trash
+                        </p>
+                    </span>
+                    <span class="flag">
+                        <p class="btn">
+                            Flag
+                        </p>
+                    </span>
+                    <span class="more">
+                        <p class="btn">
+                            More
+                        </p>
+                    </span>
+                    <a href="#" draggable="false">
+                        Item 2
+                        <span class="flagged ui-screen-hidden">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <span class="delete">
+                        <p class="btn">
+                            Trash
+                        </p>
+                    </span>
+                    <span class="flag">
+                        <p class="btn">
+                            Flag
+                        </p>
+                    </span>
+                    <span class="more">
+                        <p class="btn">
+                            More
+                        </p>
+                    </span>
+                    <a href="#" draggable="false">
+                        Item 3
+                        <span class="flagged ui-screen-hidden">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <span class="delete">
+                        <p class="btn">
+                            Trash
+                        </p>
+                    </span>
+                    <span class="flag">
+                        <p class="btn">
+                            Flag
+                        </p>
+                    </span>
+                    <span class="more">
+                        <p class="btn">
+                            More
+                        </p>
+                    </span>
+                    <a href="#" draggable="false">
+                        Item 4
+                        <span class="flagged ui-screen-hidden">
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <span class="delete">
+                        <p class="btn">
+                            Trash
+                        </p>
+                    </span>
+                    <span class="flag">
+                        <p class="btn">
+                            Flag
+                        </p>
+                    </span>
+                    <span class="more">
+                        <p class="btn">
+                            More
+                        </p>
+                    </span>
+                    <a href="#" draggable="false">
+                        Item 5
+                        <span class="flagged ui-screen-hidden">
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        $(document).on("click", "ul li span.delete", function () {
+            var listview = $(this).closest("ul");
+            $(".ui-content").css({
+                overflow: "hidden"
+            });
+            $(this).parent().css({
+                display: "block"
+            }).animate({
+                opacity: 0
+            }, {
+                duration: 250,
+                queue: false
+            }).animate({
+                height: 0
+            }, 300, function () {
+                $(this).remove();
+                listview.listview("refresh");
+                $(".ui-content").removeAttr("style");
+            });
+        }).on("click", "ul li span.flag", function (e) {
+            var text = $("p", this),
+                button = $(this).siblings("a"),
+                flagged = button.find(".flagged").hasClass("ui-screen-hidden") ? false : true;
+            if (!flagged) {
+                button.find(".flagged").removeClass("ui-screen-hidden");
+                text.text("Unflag");
+            } else {
+                button.find(".flagged").addClass("ui-screen-hidden");
+                text.text("Flag");
+            }
+        }).on("click", "ul li span.more", function () {
+            alert("nothing");
+        }).on("swipeleft", "ul li a", function (e) {
+            e.preventDefault();
+            $(this).prevAll("span").addClass("show");
+            //$(this).off("click").blur();
+            $(this).css({
+                transform: "translateX(-210px)"
+            }).one("transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd", function (event) {
+                event.preventDefault();
+                $(this).one("swiperight", function (e) {
+                    e.preventDefault();
+                    $(this).prevAll("span").removeClass("show");
+                    $(this).css({
+                        transform: "translateX(0)"
+                    }).blur();
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
